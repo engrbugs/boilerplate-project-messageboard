@@ -113,7 +113,7 @@ module.exports = function (app) {
       const { board } = req.params;
       const { text, delete_password, thread_id } = req.body;
 
-      boardsDB[board].threads = boardsDB[board].threads.map(thread => {
+      boardsDB[board].threads = boardsDB[board].threads.map((thread) => {
         if (thread._id === thread_id) {
           let newReply = {
             _id: shortid.generate(),
@@ -124,12 +124,12 @@ module.exports = function (app) {
           };
           return {
             ...thread,
-            replies: [...thread.replies, newReply]
-          }
+            replies: [...thread.replies, newReply],
+          };
         }
         return thread;
-      })
-      
+      });
+
       res.redirect(`/b/${board}/${thread_id}`);
     })
     .put((req, res) => {
